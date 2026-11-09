@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import logging
 from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, NamedTuple
+from typing import Any, Callable, Dict, List, NamedTuple, Optional
 
 import config
 from data.db2.connection import Db2ConnectionManager, get_connection_manager

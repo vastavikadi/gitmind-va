@@ -9,27 +9,30 @@ from utils.security import is_path_safe_for_indexing, redact_secrets, sanitize_a
 class TestSecurity(unittest.TestCase):
 
     def test_redact_secrets_openai(self):
-        text = "Here is my secret sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890 in the code."
+        fake_token = "sk-proj-" + "A" * 45
+        text = f"Here is my secret {fake_token} in the code."
         redacted = redact_secrets(text)
         self.assertNotIn("sk-proj-", redacted)
         self.assertIn("[REDACTED_OPENAI_PROJ]", redacted)
 
     def test_redact_secrets_gemini(self):
-        text = "Key: AIzaSyD1234567890abcdefghijklmnopqrstuv"
+        fake_key = "AIzaSy" + "B" * 33
+        text = f"Key: {fake_key}"
         redacted = redact_secrets(text)
-        self.assertNotIn("AIzaSyD", redacted)
+        self.assertNotIn("AIzaSy", redacted)
         self.assertIn("[REDACTED_GEMINI_KEY]", redacted)
 
     def test_redact_secrets_github(self):
-        text = "Token: ghp_1234567890abcdefghijklmnopqrstuvwxyz12"
+        fake_pat = "ghp_" + "C" * 36
+        text = f"Token: {fake_pat}"
         redacted = redact_secrets(text)
         self.assertNotIn("ghp_", redacted)
         self.assertIn("[REDACTED_GITHUB_PAT]", redacted)
 
     def test_redact_private_key(self):
-        text = "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA0\n-----END RSA PRIVATE KEY-----"
+        text = "-----BEGIN RSA PRIVATE KEY-----\n" + "MIIEo" + "D" * 50 + "\n-----END RSA PRIVATE KEY-----"
         redacted = redact_secrets(text)
-        self.assertNotIn("MIIEowIBAAKCAQEA0", redacted)
+        self.assertNotIn("MIIEo", redacted)
         self.assertIn("[REDACTED_PRIVATE_KEY]", redacted)
 
     def test_is_path_safe(self):

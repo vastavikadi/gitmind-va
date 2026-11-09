@@ -1,4 +1,4 @@
-# GitMind — Golden Benchmark Evaluation Results
+# GitMind 2.0 — Golden Benchmark Evaluation Results
 
 **Date:** 2026-11-09  
 **Benchmark Size:** 20 Curated Engineering Questions  
@@ -15,4 +15,4 @@
 | **Secret Redaction Rate** | 100.0% | **100.0%** | **PASS** |
 
 ## Summary
-The GitMind retrieval and evidence verification system successfully met all target thresholds on the 20-question golden evaluation dataset.
+The GitMind 2.0 retrieval and evidence verification system successfully met all target thresholds on the 20-question golden evaluation dataset.
